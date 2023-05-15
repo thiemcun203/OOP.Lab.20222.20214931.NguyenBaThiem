@@ -1,0 +1,56 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "StoreTest",
+            "request": "launch",
+            "mainClass": "AimsProject.src.StoreTest",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_dc6dd18b"
+        },
+        {
+            "type": "java",
+            "name": "CartTest",
+            "request": "launch",
+            "mainClass": "AimsProject.src.CartTest",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_dc6dd18b"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Aims",
+            "request": "launch",
+            "mainClass": "AimsProject.src.Aims",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_dc6dd18b"
+        },
+        {
+            "type": "java",
+            "name": "Cart",
+            "request": "launch",
+            "mainClass": "AimsProject.src.Cart",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_dc6dd18b"
+        },
+        {
+            "type": "java",
+            "name": "DigitalVideoDisc",
+            "request": "launch",
+            "mainClass": "AimsProject.src.DigitalVideoDisc",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_dc6dd18b"
+        },
+        {
+            "type": "java",
+            "name": "TestPassingParameter",
+            "request": "launch",
+            "mainClass": "AimsProject.src.TestPassingParameter",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_dc6dd18b"
+        }
+    ]
+}

@@ -19,6 +19,7 @@ public class Aims {
         // System.out.println(anOrder.qtyOrdered);
         
         // Print total cost of the items in the cart
+        System.out.println(dvd1.id);
         System.out.print("Total cost is: " );
         System.out.print( anOrder.totalCost());
     }

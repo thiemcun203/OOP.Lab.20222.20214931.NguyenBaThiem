@@ -1,0 +1,22 @@
+1. Try to add a method addDigitalVideoDisc which allows to pass an arbitrary number of
+arguments for dvd. Compare to an array parameter. What do you prefer in this case?
+
+
+Both `addDigitalVideoDisc(DigitalVideoDisc[] dvdList)` and `addDigitalVideoDisc(DigitalVideoDisc... dvdList)` are methods for adding one or more `DigitalVideoDisc` objects to a list.
+
+`addDigitalVideoDisc(DigitalVideoDisc[] dvdList)` takes an array of `DigitalVideoDisc` objects as a parameter. This means that the caller needs to create an array and populate it with the `DigitalVideoDisc` objects before passing it to the method. The advantage of this approach is that it allows the caller to specify exactly which `DigitalVideoDisc` objects should be added to the list.
+
+On the other hand, `addDigitalVideoDisc(DigitalVideoDisc... dvdList)` takes a variable number of `DigitalVideoDisc` objects as parameters. This means that the caller can pass any number of `DigitalVideoDisc` objects to the method without creating an array first. This approach is more flexible and convenient for the caller.
+
+In terms of implementation, `addDigitalVideoDisc(DigitalVideoDisc[] dvdList)` needs to loop through the array and add each `DigitalVideoDisc` object to the list one by one. This can be a bit more cumbersome than the implementation of `addDigitalVideoDisc(DigitalVideoDisc... dvdList)` which can directly add the variable number of `DigitalVideoDisc` objects to the list without the need for an explicit loop.
+
+In my opinion, I prefer to use 'addDigitalVideoDisc(DigitalVideoDisc... dvdList)'
+
+2. After the call of swap(jungleDVD, cinderellaDVD), why does the title of these two objects still remain?
+Because Java always pass by value to method, so jungleDVD,o1 point to same value, o2 ,cinderellaDVD point to same value, when run function, o1,o2 change  value, jungle and cinderella still point to old value
+3. After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
+Because dvd and jungleDVD point to same value, and when dvd use setter, it changes its value, lead to value is pointed by jungleDVD also changed
+
+
+
+
