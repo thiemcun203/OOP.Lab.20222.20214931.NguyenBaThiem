@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Book",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.aims.media.Book",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_dc6dd18b"
+        },
+        {
+            "type": "java",
+            "name": "Ex61",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.Ex61",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_dc6dd18b"
+        },
+        {
+            "type": "java",
             "name": "TestPassingParameter",
             "request": "launch",
             "mainClass": "hust.soict.dsai.test.disc.TestPassingParameter",
