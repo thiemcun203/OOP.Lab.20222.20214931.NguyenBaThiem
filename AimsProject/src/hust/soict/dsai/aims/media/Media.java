@@ -1,6 +1,6 @@
 package hust.soict.dsai.aims.media;
 
-abstract class Media {
+public abstract class Media {
     private String title;
     private  String category;
     private float cost;

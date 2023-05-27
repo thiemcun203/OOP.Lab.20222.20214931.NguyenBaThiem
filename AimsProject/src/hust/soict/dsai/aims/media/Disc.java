@@ -1,6 +1,6 @@
 package hust.soict.dsai.aims.media;
 
-public class Disc extends Media{
+public abstract class Disc extends Media{
     private int length;
     private String director;
     public String getDirector(){
@@ -20,5 +20,5 @@ public class Disc extends Media{
         this.length=length;
         this.director=director;
     }
-    // public Disc(){}
+    
 }
