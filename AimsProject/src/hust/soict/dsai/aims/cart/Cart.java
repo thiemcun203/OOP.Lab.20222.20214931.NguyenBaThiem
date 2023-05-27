@@ -16,9 +16,8 @@ public class Cart {
         for (Media item: itemsOrdered){
             total+=item.getCost();
         }
+        return total;
     }
-
-    
     // public boolean search(String title){
     
     //     for (int i = 0; i < qtyOrdered; i++) {
@@ -46,18 +45,18 @@ public class Cart {
     //     return false;
     // }
     
-    // public void print(){
-    //     System.out.println("***********************CART***********************");
-    //     System.out.println("Ordered Items:");
+    public void print(){
+        System.out.println("***********************CART***********************");
+        System.out.println("Ordered Items:");
 
-    //     for (int i = 0; i < qtyOrdered; i++) {
-    //         DigitalVideoDisc dvd = itemsOrdered[i];
-    //         System.out.println(Integer.toString(dvd.id)+". "+ "DVD - "+dvd.getTitle()+" - "+dvd.getCategory()+" - "+dvd.getDirector()+" - "+dvd.getLength()+":"+" "+Float.toString(dvd.getCost())+" $");
+        for (Media item: itemsOrdered) {
+            
+            System.out.println(Integer.toString(item.id)+". "+ "DVD - "+item.getTitle()+" - "+item.getCategory()+" - "+item.getDirector()+" - "+item.getLength()+":"+" "+Float.toString(item.getCost())+" $");
 
-    //     }
-    //     System.out.println("Total Cost: "+Float.toString(this.totalCost()));
-    //     System.out.println("***************************************************");
-    // }
+        }
+        System.out.println("Total Cost: "+Float.toString(this.totalCost()));
+        System.out.println("***************************************************");
+    }
 
     public static void main(String[] args) {
         // code to execute when the program is run
