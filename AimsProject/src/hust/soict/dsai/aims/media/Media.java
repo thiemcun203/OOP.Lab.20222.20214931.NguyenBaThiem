@@ -1,11 +1,14 @@
 package hust.soict.dsai.aims.media;
 import java.lang.Object;
-public abstract class Media {
+import java.util.Comparator;
+public  class Media {
     private String title;
     private  String category;
     private float cost;
     private int id ;
     private static int nbMedia = 0;
+    public static final Comparator<Media> COMPARE_BY_TITLE_COST = new MediaComparatorByTitleCost();
+    public static final Comparator<Media> COMPARE_BY_COST_TITLE = new MediaComparatorByCostTitle();
     public int getId(){
         return id;
     }
@@ -59,4 +62,10 @@ public abstract class Media {
             return false;
         }
     }
+
+    
+
+
+
+
 }
