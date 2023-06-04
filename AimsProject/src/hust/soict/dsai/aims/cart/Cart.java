@@ -18,20 +18,64 @@ public class Cart {
         }
         return total;
     }
-    
+    public ArrayList<Media> getItemsOrdered(){
+        return itemsOrdered;
+    }
     public void print(){
         System.out.println("***********************CART***********************");
         System.out.println("Ordered Items:");
 
         for (Media item: itemsOrdered) {
             
-            System.out.println(Integer.toString(item.getId())+". "+ "DVD - "+item.getTitle()+" - "+item.getCategory()+" - "+item.getDirector()+" - "+item.getLength()+":"+" "+Float.toString(item.getCost())+" $");
-
+            // System.out.println(Integer.toString(item.getId())+". "+ "DVD - "+item.getTitle()+" - "+item.getCategory()+" - "+item.getDirector()+" - "+item.getLength()+":"+" "+Float.toString(item.getCost())+" $");
+            System.out.println(item.toString());
         }
         System.out.println("Total Cost: "+Float.toString(this.totalCost()));
         System.out.println("***************************************************");
     }
-
+    public void searchId(int id) {
+		for (Media media: itemsOrdered) {
+			if (media.getId() == id) {
+				if (media instanceof DigitalVideoDisc) {
+					DigitalVideoDisc dvd = (DigitalVideoDisc) media;
+					System.out.println(dvd.toString());
+					return;
+				} else if (media instanceof CompactDisc) {
+					CompactDisc cd = (CompactDisc) media;
+					System.out.println(cd.toString());
+					return;
+				} else if (media instanceof Book) {
+					Book b = (Book) media;
+					System.out.println(b.toString());
+					return;
+				}
+			}
+		}
+		System.out.println("No match is found");
+		return;
+	}
+	
+	public void searchTitle(String title) {
+		for (Media media: itemsOrdered) {
+			if (media.getTitle().equals(title)) {
+				if (media instanceof DigitalVideoDisc) {
+					DigitalVideoDisc dvd = (DigitalVideoDisc) media;
+					System.out.println(dvd.toString());
+					return;
+				} else if (media instanceof CompactDisc) {
+					CompactDisc cd = (CompactDisc) media;
+					System.out.println(cd.toString());
+					return;
+				} else if (media instanceof Book) {
+					Book b = (Book) media;
+					System.out.println(b.toString());
+					return;
+				}
+			}
+		}
+		System.out.println("No match is found");
+		return;
+	}
 
     
     public static void main(String[] args) {

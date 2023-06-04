@@ -32,6 +32,10 @@ public class Book extends Media{
             }
         }
     }
+    @Override
+	public String toString() {
+		return ("Book - " + super.getTitle() + " - " + super.getCategory() + ": " + super.getCost()+"$");
+	}
     public static void main(String[] args){
         System.out.println("done");
         // Book newbook = new Book();
