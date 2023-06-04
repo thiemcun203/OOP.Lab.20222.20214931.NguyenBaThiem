@@ -7,8 +7,11 @@ import hust.soict.dsai.aims.store.Store;
 
 
 public class Aims {
+	private static Store store = new Store();
+	private static Cart cart = new Cart();
+	private static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        Store store = new Store();
+	
         // Create new dvd objects and add them to the cart
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
         store.addMedia(dvd1);
@@ -45,13 +48,12 @@ public class Aims {
         
         CompactDisc cD3 = new CompactDisc("Queen - Greatest Hits", "Rock", "Queen", 90, 15.99f);
         store.addMedia(cD3);
-        
+
+        // store.print();
         showMenu();
     }
-    private static Store store = new Store();
-	private static Cart cart = new Cart();
-	private static Scanner sc = new Scanner(System.in);
-	
+    
+	//all method is static to have same results
     public static void showMenu() {
         System.out.println("AIMS: ");
         System.out.println("----------------------------------");
@@ -62,6 +64,8 @@ public class Aims {
         System.out.println("----------------------------------");
         System.out.println("Please choose a number: 0-1-2-3");
         int opt = sc.nextInt();
+		sc.nextLine();
+		
 		if (opt == 1) {
 			storeMenu();
 		} else if (opt == 2) {
@@ -86,6 +90,7 @@ public class Aims {
         System.out.println("-----------------------------------");
         System.out.println("Please choose a number: 0-1-2-3-4");  
         int opt = sc.nextInt();
+		sc.nextLine(); // add an additional nextLine() call to consume the newline character before reading the actual line of text.
 		if (opt == 1) {
 			storeMenuOption1();;
 		} else if (opt == 2) {
@@ -93,7 +98,7 @@ public class Aims {
 		} else if (opt == 3) {
 			storeMenuOption3();
         } else if (opt == 4) {
-			cartMenu();;    
+			cartMenu();
 		} else if (opt == 0) {
 			System.out.println("Exit successfully");
             showMenu();
@@ -105,15 +110,14 @@ public class Aims {
     public static void storeMenuOption1(){
         System.out.println("Enter the title of media");
         String title = sc.nextLine();
-        title =sc.nextLine();
-        
+        System.out.println(title.getClass());
         int res = -1;
 		for (Media media: store.getItemsInStore()) {
 			if (media.getTitle().equals(title)) {
 				res = 0;
-				media.toString();
+				media.toString(); // it works because Dynamic Binding, downcast and use the override method
 				mediaDetailsMenu(media);
-                break;
+                
 			}
 		}
 		if (res == -1) {
@@ -131,18 +135,18 @@ public class Aims {
 		System.out.println("--------------------------------");
 		System.out.println("Please choose a number: 0-1-2");
         int opt = sc.nextInt();
+		sc.nextLine();
         if (opt==1){
             cart.addMedia(media);
             System.out.println("Add successfully");
+			storeMenu();
         }
         else if (opt == 2){
-            if (media instanceof CompactDisc){
-				CompactDisc cd = (CompactDisc) media;
-				cd.play();
-			} else if (media instanceof DigitalVideoDisc){
-				DigitalVideoDisc dvd = (DigitalVideoDisc) media;
-				dvd.play();
-			} else if (media instanceof Book) {
+            if (media instanceof Playable) {
+				Playable md = (Playable) media;
+				md.play();
+			}
+			else{
 				System.out.println("Cannot play this media as it is a book");
 			}
 			storeMenu();
@@ -154,17 +158,18 @@ public class Aims {
             System.out.println("Option does not exist");
         }
     }
+
     public static void storeMenuOption2(){
         System.out.println("Enter the title of media");
         String title = sc.nextLine();
-        title =sc.nextLine();
+
         int res = -1;
 		for (Media media: store.getItemsInStore()) {
-			if (media.getTitle()==title) {
+			if (media.getTitle().equals(title)) {
 				res = 0;
 				cart.addMedia(media);
                 System.out.println("Add successfully");
-                break;
+                storeMenu();
 			}
 		}
 		if (res == -1) {
@@ -172,21 +177,23 @@ public class Aims {
 			storeMenu();
 		}
     }
+
     public static void storeMenuOption3(){
         System.out.println("Enter the title of media");
-        String title = sc.next();
+        String title = sc.nextLine();
+
         int res = -1;
 		for (Media media: store.getItemsInStore()) {
 			if (media.getTitle().equals(title)) {
 				res = 0;
 			    if (media instanceof Playable) {
-                    System.out.println("Cannot play this media as it is a book");
-                }
-                else{
-                    Playable md = (Playable) media;
+					Playable md = (Playable) media;
                     md.play();
                 }
-                break;
+                else{
+					System.out.println("Cannot play this media as it is a book");
+                }
+                
 			}
             storeMenu();
 		}
@@ -195,8 +202,6 @@ public class Aims {
 			storeMenu();
 		}
     }
-
-
 
     public static void cartMenu() {
 		cart.print();
@@ -211,7 +216,7 @@ public class Aims {
 		System.out.println("------------------------------------");
 		System.out.println("Please choose a number: 0-1-2-3-4-5");
         int opt = sc.nextInt();
- 
+		sc.nextLine();
 		if (opt == 1) {
 			cartMenuOpt1();
 		} else if (opt == 2) {
@@ -235,6 +240,7 @@ public class Aims {
 		System.out.println("0. Back");
 		
 		int opt = sc.nextInt();
+		sc.nextLine();
 		if (opt == 1) {
 			System.out.println("Enter id: ");
 			int id = sc.nextInt();
@@ -258,6 +264,7 @@ public class Aims {
 		System.out.println("0. Back");
 		
 		int opt = sc.nextInt();
+		sc.nextLine();
 		if (opt == 1) {
 			Collections.sort(cart.getItemsOrdered(), Media.COMPARE_BY_TITLE_COST);
 			cart.print();
@@ -272,41 +279,44 @@ public class Aims {
 	}
     public static void cartMenuOpt3() {
 		System.out.println("Enter the title of the media: ");
-		String mediaName = sc.next();
-		mediaName = sc.next();
+		String mediaName = sc.nextLine();
+
 		int findingRes = -1;
 		for (Media media: cart.getItemsOrdered()) {
 			if (media.getTitle().equals(mediaName)) {
 				findingRes = 0;
 				cart.removeMedia(media);
+				cartMenu();
 			}
 		}
 		if (findingRes == -1) {
 			System.out.println("This media is not in cart");
+			cartMenu();
 		}
 		cartMenu();
 	}
     public static void cartMenuOpt4() {
 		System.out.println("Enter the title of the media: ");
-		String mediaName = sc.next();
-		mediaName = sc.next();
+		String mediaName = sc.nextLine();
+
 		int findingRes = -1;
 		for (Media media: store.getItemsInStore()) {
 			if (media.getTitle().equals(mediaName)) {
 				findingRes = 0;
-				if (media instanceof CompactDisc){
-					CompactDisc cd = (CompactDisc) media;
-					cd.play();
-				} else if (media instanceof DigitalVideoDisc){
-					DigitalVideoDisc dvd = (DigitalVideoDisc) media;
-					dvd.play();
-				} else if (media instanceof Book) {
+				if (media instanceof Playable) {
+					Playable md = (Playable) media;
+					md.play();
+				}
+				else{
 					System.out.println("Cannot play this media as it is a book");
 				}
+				
 			}
+			cartMenu();
 		}
 		if (findingRes == -1) {
 			System.out.println("This media is not in cart");
+			cartMenu();
 		}
 		cartMenu();
 	}
@@ -320,6 +330,7 @@ public class Aims {
 		System.out.println("0. Back");
 		
 		int opt = sc.nextInt();
+		sc.nextLine();
 		if (opt == 1) {
 			updateStoreOpt1();
 		} else if (opt == 2) {
@@ -330,13 +341,12 @@ public class Aims {
 	}
     public static void updateStoreOpt1() {
 		System.out.println("Enter the title of the media: ");
-		String title = sc.next();
-
+		String title = sc.nextLine();
         System.out.println("Enter the category of the media: ");
-		String category = sc.next();
-
+		String category = sc.nextLine();
 		System.out.println("Enter the cost of the media: ");
 		float cost = sc.nextFloat();
+		sc.nextLine();
 
 		System.out.println("Options: ");
 		System.out.println("--------------------------------");
@@ -346,6 +356,7 @@ public class Aims {
 		System.out.println("0. Back");
 		
 		int opt = sc.nextInt();
+		sc.nextLine();
 		if (opt == 1) {
 			Book newBook =  new Book(title, category, cost);
 			store.addMedia(newBook);
@@ -360,8 +371,7 @@ public class Aims {
 	}
     public static void updateStoreOpt2() {
 		System.out.println("Enter the title of the media: ");
-		String mediaName = sc.next();
-		mediaName = sc.next();
+		String mediaName = sc.nextLine();
 		int findingRes = -1;
 		for (Media media: store.getItemsInStore()) {
 			if (media.getTitle().equals(mediaName)) {

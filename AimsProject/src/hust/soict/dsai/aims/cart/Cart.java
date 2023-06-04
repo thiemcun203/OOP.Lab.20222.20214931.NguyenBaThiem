@@ -86,35 +86,3 @@ public class Cart {
 }
 
 
-
-
-
-
-
-
-    // public boolean search(String title){
-    
-    //     for (int i = 0; i < qtyOrdered; i++) {
-    //         if (itemsOrdered[i].getTitle().equals(title)) {
-    //             DigitalVideoDisc dvd = itemsOrdered[i];
-    //             System.out.println(Integer.toString(dvd.id)+". "+ "DVD - "+dvd.getTitle()+" - "+dvd.getCategory()+" - "+dvd.getDirector()+" - "+dvd.getLength()+":"+" "+Float.toString(dvd.getCost())+" $");
-                
-    //             return true;
-    //         } 
-    //     }
-    //     System.out.println("Can not find this dvd");
-    //     return false;
-    // }
-    // public boolean search(int id){
-    
-    //     for (int i = 0; i < qtyOrdered; i++) {
-    //         if (itemsOrdered[i].id == id) {
-    //             DigitalVideoDisc dvd = itemsOrdered[i];
-    //             System.out.println(Integer.toString(dvd.id)+". "+ "DVD - "+dvd.getTitle()+" - "+dvd.getCategory()+" - "+dvd.getDirector()+" - "+dvd.getLength()+":"+" "+Float.toString(dvd.getCost())+" $");
-                
-    //             return true;
-    //         } 
-    //     }
-    //     System.out.println("Can not find this dvd");
-    //     return false;
-    // }

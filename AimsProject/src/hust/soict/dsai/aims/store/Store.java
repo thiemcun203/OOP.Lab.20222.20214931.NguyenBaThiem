@@ -3,14 +3,11 @@ package hust.soict.dsai.aims.store;
 import hust.soict.dsai.aims.media.Media;
 import java.util.ArrayList;
 public class Store {
-    public static void main(String[] args){
-
-    }
     private ArrayList<Media> itemsInStore = new ArrayList<Media>();
-    public  void addMedia(Media item){
+    public void addMedia(Media item){
         itemsInStore.add(item);
     }
-    public  void removeMedia(Media item) {
+    public void removeMedia(Media item) {
         itemsInStore.remove(item);
     }
     public ArrayList<Media> getItemsInStore(){
