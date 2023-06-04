@@ -10,7 +10,7 @@ After that, a for-each loop is used to iterate over each element in the mediae A
 
 Within the loop, element.toString() is called to convert the current object element to its string representation. This string representation is then printed to the console using System.out.println().
 
-12. - The class that should implement the Comparable interface is Media as it aggregates Cart and Store.
+12. - The class that should implement the Comparable interface is Media
 
 - For example if we implement sort by title then by cost:
 public int compareTo(Media other) {
