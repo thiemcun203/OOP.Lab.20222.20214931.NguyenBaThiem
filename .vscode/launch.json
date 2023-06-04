@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TestPolymophism",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.aims.media.TestPolymophism",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_dc6dd18b"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "hust.soict.dsai.aims.media.Main",

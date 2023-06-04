@@ -22,7 +22,7 @@ public class TestPolymophism {
         mediae.add(cD1);
         
         for (Media m: mediae){
-            System.out.println(m.getId()+ ". " + m.getTitle()+ " " + m.getCategory() + " " + m.getCost());
+            System.out.println(m.toString());
         }
     }
 }
