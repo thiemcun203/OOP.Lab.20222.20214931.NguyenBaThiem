@@ -2,6 +2,7 @@ package hust.soict.dsai.aims.screen;
 
 import javax.swing.*;
 
+import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.Store;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 public class StoreScreen extends JFrame{
     private Store store;
+    private Cart cart;
     
     JPanel createNorth(){
         JPanel north = new JPanel();
@@ -61,15 +63,17 @@ public class StoreScreen extends JFrame{
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(3,3,2,2));
         ArrayList<Media> mediaInStore =  store.getItemsInStore();
+
         for(int i = 0; i< mediaInStore.size(); i++){
-            MediaStore cell = new MediaStore(mediaInStore.get(i));
+            MediaStore cell = new MediaStore(mediaInStore.get(i), cart);
             center.add(cell);
         }
         return center;
     }
 
-public StoreScreen(Store store){
+public StoreScreen(Store store,Cart cart){
     this.store = store;
+    this.cart = cart;
     Container cp = getContentPane();
     cp.setLayout(new BorderLayout());
     cp.add(createNorth(), BorderLayout.NORTH);
@@ -78,9 +82,12 @@ public StoreScreen(Store store){
     setVisible(true);
     setTitle("Store");
     setSize(1024,768);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 }
 public static void main(String[] args){
     Store store = new Store();
+    Cart cart = new Cart();
     DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
     store.addMedia(dvd1);
 
@@ -93,7 +100,7 @@ public static void main(String[] args){
         Book b1 = new Book("Digital Marketing","Science",20.00f );
         store.addMedia(b1);
         
-        CompactDisc cD1 = new CompactDisc( "Spider Man into multiverse","Animation Fiction", "Thiem cun", 120, 10.00f);
+        CompactDisc cD1 = new CompactDisc("Spider Man into multiverse","Animation Fiction", "Thiem cun", 120, 10.00f);
         store.addMedia(cD1);
         
         DigitalVideoDisc dvd4 = new DigitalVideoDisc("The Avengers", "Action", "Joss Whedon", 143, 29.99f);
@@ -118,7 +125,7 @@ public static void main(String[] args){
         // store.addMedia(cD3);
 
 
-    new StoreScreen(store);
+    new StoreScreen(store,cart);
 }
 }
 

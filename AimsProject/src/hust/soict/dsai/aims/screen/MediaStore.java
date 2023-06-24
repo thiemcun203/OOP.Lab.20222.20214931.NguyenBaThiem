@@ -1,5 +1,7 @@
 package hust.soict.dsai.aims.screen;
 import javax.swing.*;
+
+import hust.soict.dsai.aims.cart.Cart;
 // import javax.swing.border.Border;
 import hust.soict.dsai.aims.media.*;
 
@@ -9,9 +11,11 @@ import java.awt.event.*;
 
 public class MediaStore extends JPanel{
     private Media media;
+    private Cart cart;
 
-    public MediaStore(Media media){
+    public MediaStore(Media media, Cart cart){
         this.media = media;
+        this.cart = cart;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel title = new JLabel(media.getTitle(), null, 0);
@@ -24,12 +28,18 @@ public class MediaStore extends JPanel{
         JPanel container = new JPanel();
         container.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        container.add(new JButton("Add to cart"));
+        ButtonListener btnListener = new ButtonListener();
+
+
+        JButton btnAddToCart = new JButton("Add to cart");
+        container.add(btnAddToCart);
+        btnAddToCart.addActionListener(btnListener);
+        
         if (media instanceof Playable){
-            ButtonListener btnPlayListener = new ButtonListener();
+            
             JButton btnPlay = new JButton("Play");
             container.add(btnPlay);
-            btnPlay.addActionListener(btnPlayListener);
+            btnPlay.addActionListener(btnListener);
         }
 
         this.add(Box.createVerticalGlue());
@@ -45,15 +55,43 @@ public class MediaStore extends JPanel{
 
     }
 
+
     private class ButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            
+            String button = e.getActionCommand();
+            if (button.equals("Play")){
+                JOptionPane.showMessageDialog(MediaStore.this, "Playing " + media.getTitle() + "\n" + media.getCategory() + "\n" +media.getCost()+" $" );
 
-            JOptionPane.showMessageDialog(MediaStore.this, "Playing " + media.getTitle());
+            }
+            else if (button.equals("Add to cart")){
+                JOptionPane pane = new JOptionPane("Add to cart successffuly", JOptionPane.INFORMATION_MESSAGE);
+                JDialog dialog = pane.createDialog(null, "Notification");
 
+                // Set time exits
+                Timer timer = new Timer(800, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dialog.dispose();
+                }
+                });
+
+                // //RUN
+                timer.start();
+                dialog.setVisible(true);
+            }
         }
-
     }
 
-   
+
+
+
+
 }
+
+
+
+
+   
+
