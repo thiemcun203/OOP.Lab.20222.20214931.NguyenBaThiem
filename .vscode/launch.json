@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "StoreScreen",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.aims.screen.StoreScreen",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_bf4d3f90"
+        },
+        {
+            "type": "java",
             "name": "NumberGrid",
             "request": "launch",
             "mainClass": "hust.soict.dsai.swing.NumberGrid",

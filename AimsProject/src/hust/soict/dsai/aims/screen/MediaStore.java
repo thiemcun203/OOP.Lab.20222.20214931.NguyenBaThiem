@@ -1,14 +1,15 @@
 package hust.soict.dsai.aims.screen;
-
 import javax.swing.*;
-
-import hust.soict.dsai.aims.media.Media;
+// import javax.swing.border.Border;
+import hust.soict.dsai.aims.media.*;
 
 import java.awt.*;
-import java.util.concurrent.Flow;
+import java.awt.event.*;
 
-public class MediaStore {
+
+public class MediaStore extends JPanel{
     private Media media;
+
     public MediaStore(Media media){
         this.media = media;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -21,11 +22,14 @@ public class MediaStore {
         cost.setAlignmentX(CENTER_ALIGNMENT);
 
         JPanel container = new JPanel();
-        container.setLayout(new FlowLayout()(FlowLayout.CENTER));
+        container.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         container.add(new JButton("Add to cart"));
         if (media instanceof Playable){
-            container.add(new JButton("Play"));
+            ButtonListener btnPlayListener = new ButtonListener();
+            JButton btnPlay = new JButton("Play");
+            container.add(btnPlay);
+            btnPlay.addActionListener(btnPlayListener);
         }
 
         this.add(Box.createVerticalGlue());
@@ -36,8 +40,20 @@ public class MediaStore {
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+        
+        
 
     }
-    
-    
+
+    private class ButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+
+            JOptionPane.showMessageDialog(MediaStore.this, "Playing " + media.getTitle());
+
+        }
+
+    }
+
+   
 }

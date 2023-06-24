@@ -16,7 +16,7 @@ public class NumberGrid extends JFrame{
     public NumberGrid(){
         tfDisplay = new JTextField(30);
         tfDisplay.setComponentOrientation(
-            ComponentOrientation.RIGHT_TO_LEFT
+            ComponentOrientation.LEFT_TO_RIGHT
         );
         JPanel panelButtons = new JPanel(new GridLayout(4,3)); // inner layout
         addButtons(panelButtons);
