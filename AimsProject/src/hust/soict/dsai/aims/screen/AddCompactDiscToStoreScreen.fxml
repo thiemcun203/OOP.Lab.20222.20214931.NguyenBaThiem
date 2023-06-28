@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Options">
+               <items>
+                  <MenuItem fx:id="viewCart" mnemonicParsing="false" text="View Cart" />
+                  <MenuItem fx:id="viewStore" mnemonicParsing="false" text="View Store" />
+                  <Menu mnemonicParsing="false" text="Update Store">
+                     <items>
+                        <MenuItem fx:id="addBook" mnemonicParsing="false" text="Add Book" />
+                        <MenuItem fx:id="addDVD" mnemonicParsing="false" text="Add DVD" />
+                        <MenuItem fx:id="addCD" mnemonicParsing="false" text="Add CD" />
+                     </items>
+                  </Menu>
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <AnchorPane prefHeight="741.0" prefWidth="179.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="RIGHT" wrappingWidth="179.21630859375">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="13.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Director" textAlignment="RIGHT" wrappingWidth="171.21630859375">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="9.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" textAlignment="RIGHT" wrappingWidth="179.21630859375">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <Text layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cost $" textAlignment="RIGHT" wrappingWidth="179.21630859375">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="5.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length" textAlignment="RIGHT" wrappingWidth="179.21630859375">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <VBox prefHeight="741.0" prefWidth="866.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" CD" wrappingWidth="100.90478515625">
+               <font>
+                  <Font size="41.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="350.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <TextField fx:id="title" prefHeight="70.0" prefWidth="933.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="100.0" top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="category" prefHeight="70.0" prefWidth="933.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="20.0" right="100.0" top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="director" prefHeight="70.0" prefWidth="933.0">
+               <VBox.margin>
+                  <Insets left="20.0" right="100.0" top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="length" prefHeight="70.0" prefWidth="933.0">
+               <VBox.margin>
+                  <Insets left="20.0" right="100.0" top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="cost" prefHeight="70.0" prefWidth="933.0">
+               <VBox.margin>
+                  <Insets left="20.0" right="100.0" top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </TextField>
+            <Button fx:id="addCDToStore" mnemonicParsing="false" prefHeight="53.0" prefWidth="295.0" text="Add CD" textFill="#ff2929">
+               <font>
+                  <Font name="System Bold" size="43.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="250.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

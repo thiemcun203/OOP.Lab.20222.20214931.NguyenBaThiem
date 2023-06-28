@@ -1,21 +1,59 @@
 package hust.soict.dsai.aims.screen;
 
-import javax.swing.event.ChangeListener;
-
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
-import javafx.collections.FXCollections;
+import hust.soict.dsai.aims.store.Store;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 
 public class CartScreenController {
     private Cart cart;
-    private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList(null);
+    private Store store;
+    private Runnable windowCloser;
+    public CartScreenController(Cart cart, Store store, Runnable windowCloser){
+        super();
+        this.cart = cart;
+        this.store = store;
+        this.windowCloser = windowCloser;
+    }
 
+    
     @FXML
     private TableView<Media> tblMedia;
+
+    @FXML
+    private Button btnPlay;
+
+    @FXML
+    private Button btnRemove;
+
+    @FXML
+    private Button btnPlaceOrder;
+
+    @FXML
+    private TextField tfFilter;
+
+    @FXML
+    private RadioButton radioBtnFilterTitle;
+
+    @FXML
+    private RadioButton radioBtnFilterId;
+
+    @FXML
+    private ToggleGroup filterCategory;
 
     @FXML
     private TableColumn<Media, String> colMediaTitle;
@@ -27,19 +65,28 @@ public class CartScreenController {
     private TableColumn<Media, Float> colMediaCost;
 
     @FXML
-    void btnRemovePressed(ActionEvent event){
-        Media media = tblMedia.getSelectionModel().getSelectedItem();
-        cart.removeMedia(media);
-    }
+    private Label totalCost;
 
-    public CartScreenController(Cart cart){
-        super();
-        this.cart = cart;
-    }
+    @FXML
+    private MenuItem addBook;
+
+    @FXML
+    private MenuItem addCD;
+
+    @FXML
+    private MenuItem addDVD;
+
+
+    @FXML
+    private MenuItem viewCart;
+
+    @FXML
+    private MenuItem viewStore;
+
     @FXML
     private void initialize(){
         colMediaTitle.setCellValueFactory(
-            new PropertyValueFactory<Media, String>("title");
+            new PropertyValueFactory<Media, String>("title")
         );
         colMediacategory.setCellValueFactory(
             new PropertyValueFactory<Media, String>("category")
@@ -54,7 +101,7 @@ public class CartScreenController {
 
         tblMedia.getSelectionModel().selectedItemProperty().addListener(
             new ChangeListener<Media>(){
-
+                    
             @Override
             public void changed(ObservableValue<? extends Media> observable, Media oldValue, Media newValue){
                 if (newValue != null){
@@ -64,15 +111,66 @@ public class CartScreenController {
             }
         );
 
-        tfFilter.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
-                showFilteredMedia(newValue);
-            }
+        btnRemove.setOnAction(e -> {
+            Media media = tblMedia.getSelectionModel().getSelectedItem();
+            cart.removeMedia(media);
+            updateTotalCost();
+
+        });
+
+        btnPlay.setOnAction(e -> {
+            Media media = tblMedia.getSelectionModel().getSelectedItem();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Playback");
+            alert.setHeaderText(null);
+            alert.setContentText("Playing" + media.getTitle() + "\n" + media.getCategory() + "\n" +media.getCost()+" $");
+            alert.showAndWait();
+        });
+        updateTotalCost();
+
+        btnPlaceOrder.setOnAction(e -> {
+            // we need click to table first then place order
+            for (int i = tblMedia.getItems().size()-1  ;i>-1;i--){
+                        cart.removeMedia(tblMedia.getSelectionModel().getSelectedItem());
+                    }
+
+            updateTotalCost();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Your Order is being processed");
+            alert.showAndWait();
+        });
+
+        viewStore.setOnAction(e ->{
+            
+            new StoreScreen(store, cart);
             
         });
 
+        addDVD.setOnAction(e -> {
+            new AddDigitalVideoDiscToStoreScreen(store, cart);
+            windowCloser.run();
+        });
+        addCD.setOnAction(e -> {
+            new AddCompactDiscToStoreScreen(store, cart);
+            windowCloser.run();
+        });
+        addBook.setOnAction(e -> {
+            new AddBookToStoreScreen(store, cart);
+            windowCloser.run();
+        });
 
+
+        
+ 
+        // tfFilter.textProperty().addListener(new ChangeListener<String>() {
+        //     @Override
+        //     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
+        //         showFilteredMedia(newValue);
+        //     }
+            
+        // });
     }
 
     void updateButtonBar(Media media){
@@ -84,8 +182,22 @@ public class CartScreenController {
             btnPlay.setVisible(false);
         }
     }
+    void updateTotalCost(){
+        float tCost = cart.totalCost();
+        totalCost.setText(String.format("%.2f $", tCost));
+    }
+    // void showFilteredMedia(newValue){
+    //     if (radioBtnFilterId.isSelected()){
 
-
-
-
+    //     }
+    // }
 }
+
+
+// for other way to set action Remove in javafx
+
+    // @FXML
+    // void btnRemovePressed(ActionEvent event){
+    //     Media media = tblMedia.getSelectionModel().getSelectedItem();
+    //     cart.removeMedia(media);
+    // }

@@ -25,13 +25,53 @@ public class StoreScreen extends JFrame{
     JMenuBar createMenuBar(){
         JMenu menu = new JMenu("Options");
         JMenu smUpdateStore = new JMenu("Update Store");
-        smUpdateStore.add(new JMenuItem("Add Book", ABORT));
-        smUpdateStore.add(new JMenuItem("Add DVD", ABORT));
-        smUpdateStore.add(new JMenuItem("Add CD"));
+        // add book
+        JMenuItem addBook = new JMenuItem("Add Book", ABORT);
+        addBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle the event here
+                new AddBookToStoreScreen(store,cart);
+                setVisible(false);
+            }
+        });
+        smUpdateStore.add(addBook);
+        
+        JMenuItem addCD = new JMenuItem("Add CD", ABORT);
+        addCD.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle the event here
+                new AddCompactDiscToStoreScreen(store,cart);
+                setVisible(false);
+            }
+        });
+        smUpdateStore.add(addCD);
+
+        JMenuItem addDVD = new JMenuItem("Add DVD", ABORT);
+        addDVD.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle the event here
+                new AddDigitalVideoDiscToStoreScreen(store,cart);
+                setVisible(false);
+            }
+        });
+        smUpdateStore.add(addDVD);
 
         menu.add(smUpdateStore);
         menu.add(new JMenuItem("View Store"));
-        menu.add(new JMenuItem("View Cart"));
+        // Add event for "View Cart" menu item
+        JMenuItem viewCartMenuItem = new JMenuItem("View Cart");
+        viewCartMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle the event here
+                new CartScreen(cart,store);
+                setVisible(false);
+            }
+        });
+        menu.add(viewCartMenuItem);
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -46,14 +86,22 @@ public class StoreScreen extends JFrame{
         JLabel title = new JLabel("AIMS");
         title.setFont(new Font(title.getFont().getName(),Font.PLAIN, 50 ));
 
-        JButton cart = new JButton("View cart");
-        cart.setPreferredSize(new Dimension(100,50));
-        cart.setMaximumSize(new Dimension(100,50));
+
+        JButton viewCart = new JButton("View cart");
+        viewCart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CartScreen(cart,store);
+                setVisible(false);
+            }
+        });
+        viewCart.setPreferredSize(new Dimension(100,50));
+        viewCart.setMaximumSize(new Dimension(100,50));
 
         header.add(Box.createRigidArea(new Dimension(10, 10)));
         header.add(title);
         header.add(Box.createHorizontalGlue());
-        header.add(cart);
+        header.add(viewCart);
         header.add(Box.createRigidArea(new Dimension(10,10)));
         return header;
 
@@ -70,6 +118,7 @@ public class StoreScreen extends JFrame{
         }
         return center;
     }
+
 
 public StoreScreen(Store store,Cart cart){
     this.store = store;
@@ -88,8 +137,8 @@ public StoreScreen(Store store,Cart cart){
 public static void main(String[] args){
     Store store = new Store();
     Cart cart = new Cart();
-    DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
-    store.addMedia(dvd1);
+        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
+        store.addMedia(dvd1);
 
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
         store.addMedia(dvd2);
@@ -115,14 +164,14 @@ public static void main(String[] args){
         Book b2 = new Book("The Great Gatsby", "Fiction", 12.99f);
         store.addMedia(b2);
 
-         Book b3 = new Book("The Catcher in the Rye", "Fiction", 10.99f);
+        Book b3 = new Book("The Catcher in the Rye", "Fiction", 10.99f);
         store.addMedia(b3);
         
         CompactDisc cD2 = new CompactDisc("Taylor Swift - 1989", "Pop", "Taylor Swift", 60, 12.50f);
         store.addMedia(cD2);
         
-        // CompactDisc cD3 = new CompactDisc("Queen - Greatest Hits", "Rock", "Queen", 90, 15.99f);
-        // store.addMedia(cD3);
+        CompactDisc cD3 = new CompactDisc("Queen - Greatest Hits", "Rock", "Queen", 90, 15.99f);
+        store.addMedia(cD3);
 
 
     new StoreScreen(store,cart);

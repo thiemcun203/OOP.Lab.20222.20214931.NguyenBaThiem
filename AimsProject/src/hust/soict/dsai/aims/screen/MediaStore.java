@@ -49,10 +49,6 @@ public class MediaStore extends JPanel{
         this.add(container);
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-        
-        
-
     }
 
 
@@ -66,6 +62,7 @@ public class MediaStore extends JPanel{
 
             }
             else if (button.equals("Add to cart")){
+                cart.addMedia(media);
                 JOptionPane pane = new JOptionPane("Add to cart successffuly", JOptionPane.INFORMATION_MESSAGE);
                 JDialog dialog = pane.createDialog(null, "Notification");
 

@@ -2,6 +2,11 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
-    ]
+        "lib/**/*.jar",
+        "/Users/nguyenbathiem/Downloads/**/*.jar"
+
+        
+    ],
+    "java.fxHome": "/Users/nguyenbathiem/Downloads/javafx-sdk-20.0.1"
+
 }
