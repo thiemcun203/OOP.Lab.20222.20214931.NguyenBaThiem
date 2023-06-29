@@ -5,6 +5,7 @@ import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -63,13 +64,30 @@ public class AddCompactDiscToStoreScreenController {
     String tDirector = director.getText();
     Integer tLength = Integer.valueOf(length.getText());
     Float tCost = Float.valueOf(cost.getText());
-    CompactDisc dvd = new CompactDisc(tTitle, tCategory, tDirector, tLength, tCost);
-    store.addMedia(dvd);
-    title.clear();
-    category.clear();
-    director.clear();
-    length.clear();
-    cost.clear();
+
+    if (tLength > 0 && tCost >0){
+        CompactDisc dvd = new CompactDisc(tTitle, tCategory, tDirector, tLength, tCost);
+        store.addMedia(dvd);
+        title.clear();
+        category.clear();
+        director.clear();
+        length.clear();
+        cost.clear();
+    }
+    if (tLength <= 0){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Illegal CD Length");
+        alert.setHeaderText(null);
+        alert.setContentText("ERROR: CD Length is non-positive");
+        alert.showAndWait();
+    }
+    if (tCost <= 0){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Illegal CD Cost");
+        alert.setHeaderText(null);
+        alert.setContentText("ERROR: CD Cost is non-positive real number");
+        alert.showAndWait();
+    }
     
     });
     viewStore.setOnAction(e -> {

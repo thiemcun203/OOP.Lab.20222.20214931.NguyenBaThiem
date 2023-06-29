@@ -53,19 +53,20 @@ public  class Media {
     }
     @Override
     public boolean equals(Object o){
-        if (o instanceof Media){
-            Media that = (Media) o;
-            return this.title == that.title;
-        
-        }
-        else{
-            return false;
+        try{
+            if (o instanceof Media){
+                Media that = (Media) o;
+                return this.title == that.title; 
+            }
+            else{
+                return false;
+            }
+            
+        } catch(NullPointerException n){
+            throw n;
+        }catch(ClassCastException c){
+            throw c;
         }
     }
-
     
-
-
-
-
 }

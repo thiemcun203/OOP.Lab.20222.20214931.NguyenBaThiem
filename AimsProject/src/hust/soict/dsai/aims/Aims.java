@@ -2,6 +2,7 @@ package hust.soict.dsai.aims;
 import java.util.Scanner;
 import java.util.Collections;
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.Store;
 
@@ -10,13 +11,13 @@ public class Aims {
 	private static Store store = new Store();
 	private static Cart cart = new Cart();
 	private static Scanner sc = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PlayerException {
 	
         // Create new dvd objects and add them to the cart
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
         store.addMedia(dvd1);
 
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
+        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", -10, 24.95f);
         store.addMedia(dvd2);
 
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 18.99f);
@@ -25,10 +26,10 @@ public class Aims {
         Book b1 = new Book("Digital Marketing","Science",20.00f );
         store.addMedia(b1);
         
-        CompactDisc cD1 = new CompactDisc( "Spider Man into multiverse","Animation Fiction", "Thiem cun", 120, 10.00f);
+        CompactDisc cD1 = new CompactDisc( "Spider Man into multiverse","Animation Fiction", "Thiem cun", -10, 10.00f);
         store.addMedia(cD1);
         
-        DigitalVideoDisc dvd4 = new DigitalVideoDisc("The Avengers", "Action", "Joss Whedon", 143, 29.99f);
+        DigitalVideoDisc dvd4 = new DigitalVideoDisc("The Avengers", "Action", "Joss Whedon", 0, 29.99f);
         store.addMedia(dvd4);
         
         DigitalVideoDisc dvd5 = new DigitalVideoDisc("Jurassic Park", "Adventure", "Steven Spielberg", 127, 14.95f);
@@ -54,7 +55,7 @@ public class Aims {
     }
     
 	//all method is static to have same results
-    public static void showMenu() {
+    public static void showMenu() throws PlayerException {
         System.out.println("AIMS: ");
         System.out.println("----------------------------------");
         System.out.println("1. View store");
@@ -79,7 +80,7 @@ public class Aims {
 		}
         }
 
-    public static void storeMenu() {
+    public static void storeMenu() throws PlayerException {
         System.out.println("Options: ");
         System.out.println("----------------------------------");
         System.out.println("1. See a media's details");
@@ -107,7 +108,7 @@ public class Aims {
 		}
     }
 
-    public static void storeMenuOption1(){
+    public static void storeMenuOption1() throws PlayerException{
         System.out.println("Enter the title of media");
         String title = sc.nextLine();
         System.out.println(title.getClass());
@@ -126,7 +127,7 @@ public class Aims {
 		}
     }
 
-    public static void mediaDetailsMenu(Media media) {
+    public static void mediaDetailsMenu(Media media) throws PlayerException {
 		System.out.println("Options: ");
 		System.out.println("--------------------------------");
 		System.out.println("1. Add to cart");
@@ -159,7 +160,7 @@ public class Aims {
         }
     }
 
-    public static void storeMenuOption2(){
+    public static void storeMenuOption2() throws PlayerException{
         System.out.println("Enter the title of media");
         String title = sc.nextLine();
 
@@ -178,7 +179,7 @@ public class Aims {
 		}
     }
 
-    public static void storeMenuOption3(){
+    public static void storeMenuOption3() throws PlayerException{
         System.out.println("Enter the title of media");
         String title = sc.nextLine();
 
@@ -203,7 +204,7 @@ public class Aims {
 		}
     }
 
-    public static void cartMenu() {
+    public static void cartMenu() throws PlayerException {
 		cart.print();
 		System.out.println("Options: ");
 		System.out.println("------------------------------------");
@@ -232,7 +233,7 @@ public class Aims {
 			storeMenu();
 		}
     }
-    public static void cartMenuOpt1() {
+    public static void cartMenuOpt1() throws PlayerException {
 		System.out.println("Options: ");
 		System.out.println("--------------------------------");
 		System.out.println("1. Filter by id");
@@ -256,7 +257,7 @@ public class Aims {
 			cartMenu();
 		}
 	}
-	public static void cartMenuOpt2() {
+	public static void cartMenuOpt2() throws PlayerException {
 		System.out.println("Options: ");
 		System.out.println("--------------------------------");
 		System.out.println("1. Sort by title");
@@ -277,7 +278,7 @@ public class Aims {
 			cartMenu();
 		}
 	}
-    public static void cartMenuOpt3() {
+    public static void cartMenuOpt3() throws PlayerException {
 		System.out.println("Enter the title of the media: ");
 		String mediaName = sc.nextLine();
 
@@ -295,7 +296,7 @@ public class Aims {
 		}
 		cartMenu();
 	}
-    public static void cartMenuOpt4() {
+    public static void cartMenuOpt4() throws PlayerException {
 		System.out.println("Enter the title of the media: ");
 		String mediaName = sc.nextLine();
 
@@ -322,7 +323,7 @@ public class Aims {
 	}
 
 
-    public static void updateStore(){
+    public static void updateStore() throws PlayerException{
         System.out.println("Options: ");
 		System.out.println("--------------------------------");
 		System.out.println("1. Add a media to store");
@@ -339,7 +340,7 @@ public class Aims {
 			showMenu();
 		}
 	}
-    public static void updateStoreOpt1() {
+    public static void updateStoreOpt1() throws PlayerException {
 		System.out.println("Enter the title of the media: ");
 		String title = sc.nextLine();
         System.out.println("Enter the category of the media: ");
@@ -369,7 +370,7 @@ public class Aims {
 		}
 		updateStore();
 	}
-    public static void updateStoreOpt2() {
+    public static void updateStoreOpt2() throws PlayerException {
 		System.out.println("Enter the title of the media: ");
 		String mediaName = sc.nextLine();
 		int findingRes = -1;

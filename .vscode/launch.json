@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CompactDisc",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.aims.media.CompactDisc",
+            "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_bf4d3f90"
+        },
+        {
+            "type": "java",
             "name": "MainFrame",
             "request": "launch",
             "mainClass": "hust.soict.dsai.aims.screen.MainFrame",
@@ -75,8 +82,6 @@
             "mainClass": "hust.soict.dsai.aims.screen.CartScreen",
             "projectName": "OOP.Lab.20222.20214931.NguyenBaThiem_bf4d3f90",
             "vmArgs": "--module-path /Users/nguyenbathiem/Downloads/javafx-sdk-20.0.1/lib --add-modules=javafx.controls,javafx.fxml"
-
-
         },
         {
             "type": "java",

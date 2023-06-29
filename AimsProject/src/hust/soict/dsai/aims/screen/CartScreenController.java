@@ -1,11 +1,17 @@
 package hust.soict.dsai.aims.screen;
 
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.Media;
 import hust.soict.dsai.aims.media.Playable;
 import hust.soict.dsai.aims.store.Store;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -99,13 +105,14 @@ public class CartScreenController {
         btnPlay.setVisible(false);
         btnRemove.setVisible(false);
 
+        // add listner to each row if change from this row to other row it will updateButtonbar
         tblMedia.getSelectionModel().selectedItemProperty().addListener(
             new ChangeListener<Media>(){
                     
             @Override
             public void changed(ObservableValue<? extends Media> observable, Media oldValue, Media newValue){
                 if (newValue != null){
-                    updateButtonBar(newValue);
+                    updateButtonBar(newValue); //in other cases, it can update total cost, color, ,...
                 }
             }
             }
@@ -163,14 +170,14 @@ public class CartScreenController {
 
 
         
- 
-        // tfFilter.textProperty().addListener(new ChangeListener<String>() {
-        //     @Override
-        //     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
-        //         showFilteredMedia(newValue);
-        //     }
-            
-        // });
+        //if other text included empty changed, we can show filter media, given selecting radio
+        // it means we have to select radio at first
+        tfFilter.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
+                showFilteredMedia(newValue);
+            }
+        });
     }
 
     void updateButtonBar(Media media){
@@ -186,11 +193,37 @@ public class CartScreenController {
         float tCost = cart.totalCost();
         totalCost.setText(String.format("%.2f $", tCost));
     }
-    // void showFilteredMedia(newValue){
-    //     if (radioBtnFilterId.isSelected()){
+    
+    void showFilteredMedia(String newValue) {
+    if (radioBtnFilterId.isSelected()) {
+        Predicate<Media> filterPredicate = item -> item.getId() == Integer.parseInt(tfFilter.getText()); //condition to filter
+        ObservableList<Media> filteredItems = cart.getItemsOrdered() 
+            .stream()
+            .filter(filterPredicate)
+            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        tblMedia.setItems(filteredItems);
+    }
 
-    //     }
-    // }
+    if (radioBtnFilterTitle.isSelected()) {
+        String text = tfFilter.getText();
+        Predicate<Media> filterPredicate = item -> item.getTitle().equalsIgnoreCase(text); //condition to filter
+        ObservableList<Media> filteredItems = cart.getItemsOrdered() 
+            .stream()
+            .filter(filterPredicate)
+            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        tblMedia.setItems(filteredItems);
+    }
+    
+    viewCart.setOnAction(e -> {
+        windowCloser.run();
+        new CartScreen(cart,store);
+    });
+    
+    
+}
+
+    
+
 }
 
 

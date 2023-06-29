@@ -5,6 +5,7 @@ import hust.soict.dsai.aims.cart.Cart;
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -55,11 +56,20 @@ public class AddBookToStoreScreenController {
         String tTitle = title.getText();
         String tCategory = category.getText();
         Float tCost = Float.valueOf(cost.getText());
-        Book book = new Book(tTitle, tCategory,  tCost);
-        store.addMedia(book);
-        title.clear();
-        category.clear();
-        cost.clear();
+        if (tCost > 0){
+            Book book = new Book(tTitle, tCategory,  tCost);
+            store.addMedia(book);
+            title.clear();
+            category.clear();
+            cost.clear();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Illegal Book Cost");
+            alert.setHeaderText(null);
+            alert.setContentText("ERROR: Book Cost is non-positive real number");
+            alert.showAndWait();
+        }
     
     });
     viewStore.setOnAction(e -> {

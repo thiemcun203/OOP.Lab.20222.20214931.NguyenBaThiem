@@ -36,26 +36,26 @@ public class Cart {
         System.out.println("Total Cost: "+Float.toString(this.totalCost()));
         System.out.println("***************************************************");
     }
-    public void searchId(int id) {
+    public Media searchId(int id) {
 		for (Media media: itemsOrdered) {
 			if (media.getId() == id) {
 				if (media instanceof DigitalVideoDisc) {
 					DigitalVideoDisc dvd = (DigitalVideoDisc) media;
 					System.out.println(dvd.toString());
-					return;
+					return dvd;
 				} else if (media instanceof CompactDisc) {
 					CompactDisc cd = (CompactDisc) media;
 					System.out.println(cd.toString());
-					return;
+					return cd;
 				} else if (media instanceof Book) {
 					Book b = (Book) media;
 					System.out.println(b.toString());
-					return;
+					return b;
 				}
 			}
 		}
 		System.out.println("No match is found");
-		return;
+		return null;
 	}
 	
 	public void searchTitle(String title) {
@@ -80,7 +80,6 @@ public class Cart {
 		return;
 	}
 
-    
     public static void main(String[] args) {
         // code to execute when the program is run
         System.out.println("Hello, Thiem");
